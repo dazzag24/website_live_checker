@@ -6,8 +6,10 @@ from email.MIMEBase import MIMEBase
 from email.MIMEText import MIMEText
 from email import Encoders
 
+
+#only works with gmail
 def mail(to, subject, text):
-	gmail_user = "david@bostonwebgroup.com"
+	gmail_user = "EMAIL@gmail.com" 
 	gmail_pwd = "PASSWORD"
 	print "[+] Sending email to " + to 
 	msg = MIMEMultipart()
@@ -37,7 +39,7 @@ def chk(domain):
 		downcount+=1
 		print domain + " - "+ "	DOWN!"
 		#send email to bwg
-		mail("bwg@bostonwebgroup.com","Notice! Website: "+domain+" is down!","Automated email.")
+		mail("SEND_TO_EMAIL@email.com","Notice! Website: "+domain+" is down!","Automated email.")
 	except KeyboardInterrupt:
 		print "bye"
 		exit()
