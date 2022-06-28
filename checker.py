@@ -47,7 +47,7 @@ def check_site(url: str, title: str):
 f = open('urls.list','r')
 lines = f.readlines()
 for line in lines:
-	#print(line)
+	print(line)
 	url, title = line.split(',')
 	check_site(url, title.rstrip())
 f.close()
