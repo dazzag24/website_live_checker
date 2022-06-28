@@ -45,5 +45,6 @@ jobs:
           pip3 install python-dotenv==0.20.0
           echo "http://nuc:1935/,Get iPlayer" > urls.list
           echo "http://zeropi:8765/,ZeroPi" >> urls.list
-          echo "http://nuc:1936,Poo Player" >> urls.list
+          echo "http://nuc:1936/,Poo Player" >> urls.list
+          more urls.list
           python3 ./checker.py   
