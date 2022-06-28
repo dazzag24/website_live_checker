@@ -43,5 +43,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           pip3 install python-dotenv==0.20.0
-          echo "http://nuc:1935/,Get iPlayer\nhttp://zeropi:8765/,ZeroPi\nhttp://nuc:1936,Poo Player" > urls.list
+          echo "http://nuc:1935/,Get iPlayer" > urls.list
+          echo "http://zeropi:8765/,ZeroPi" >> urls.list
+          echo "http://nuc:1936,Poo Player" >> urls.list
           python3 ./checker.py   
