@@ -1,53 +1,55 @@
-import urllib2
+import http.client 
+import urllib
+import urllib.request
 import os
-import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEBase import MIMEBase
-from email.MIMEText import MIMEText
-from email import Encoders
+from dotenv import load_dotenv
 
+load_dotenv()
 
-#only works with gmail
-def mail(to, subject, text):
-	gmail_user = "EMAIL@gmail.com" 
-	gmail_pwd = "PASSWORD"
-	print "[+] Sending email to " + to 
-	msg = MIMEMultipart()
-	msg['From'] = gmail_user
-	msg['To'] = to
-	msg['Subject'] = subject
-	msg.attach(MIMEText(text))
-	mailServer = smtplib.SMTP("smtp.gmail.com", 587)
-	mailServer.ehlo()
-	mailServer.starttls()
-	mailServer.ehlo()
-	mailServer.login(gmail_user, gmail_pwd)
-	mailServer.sendmail(gmail_user, to, msg.as_string())
-	mailServer.close()
-upcount=0
-downcount=0
-def chk(domain):
+PUSHOVER_APP_TOKEN = os.environ.get("PUSHOVER_APP_TOKEN")
+PUSHOVER_USER = os.environ.get("PUSHOVER_USER")
+
+upcount = 0
+downcount = 0
+
+def notify_pushover(url: str, title: str):
+	conn = http.client.HTTPSConnection("api.pushover.net:443")
+	conn.request("POST", "/1/messages.json",
+	urllib.parse.urlencode({
+		"token": PUSHOVER_APP_TOKEN,         	# Insert app token here
+		"user": PUSHOVER_USER,          	 	# Insert user token here
+		"html": "1",                            # 1 for HTML, 0 to disable
+		"title": "Site Down!",              	# Title of the message
+		"message": f"{title} is not reachable!",            	# Content of the message - include HTML if required
+		"url": url,                 			# Link to be included in message
+		"url_title":title,                   	# Text for the link
+		"sound": "none",                        # Define the sound played on the receiving device
+	}), { "Content-type": "application/x-www-form-urlencoded" })
+	conn.getresponse()
+
+def check_site(url: str, title: str):
 	try:
-		if domain:
+		if url:
 			global upcount
-			upcount+=1
-			req=urllib2.Request("http://www."+domain, headers={'User-Agent':"Magic Browser"})
-			code=urllib2.urlopen(req).getcode()
-			print domain+" - " + str(code)
+			req = urllib.request.Request(url, headers={'User-Agent':"Magic Browser"})
+			code = urllib.request.urlopen(req).getcode()
+			print(f"Url: {url:<100} Returned: {code}")
+			upcount += 1
 	except IOError:
 		global downcount
-		downcount+=1
-		print domain + " - "+ "	DOWN!"
-		#send email to bwg
-		mail("SEND_TO_EMAIL@email.com","Notice! Website: "+domain+" is down!","Automated email.")
+		downcount += 1
+		print(f"Url: {url:<100} Unreachable")
+		notify_pushover(url, title)
 	except KeyboardInterrupt:
-		print "bye"
+		print("Finished")
 		exit()
 	
-f=open('domains.list','r')
-domains=f.read().split('\n')
-for domain in domains:
-	chk(domain)
+f = open('urls.list','r')
+lines = f.readlines()
+for line in lines:
+	#print(line)
+	url, title = line.split(',')
+	check_site(url, title.rstrip())
 f.close()
 
-print "Done. "+ str(upcount+downcount) +" domains checked. "+ str(upcount)+" up, "+str(downcount)+" down."
+print(f"{upcount+downcount} domains checked. UP: {upcount}\t DOWN: {downcount}")
