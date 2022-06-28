@@ -43,4 +43,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           pip3 install python-dotenv==0.20.0
+          echo "http://nuc:1935/,Get iPlayer" > urls.list
           python3 ./checker.py   
