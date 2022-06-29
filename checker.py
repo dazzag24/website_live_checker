@@ -2,12 +2,15 @@ import http.client
 import urllib
 import urllib.request
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
 
 PUSHOVER_APP_TOKEN = os.environ.get("PUSHOVER_APP_TOKEN")
 PUSHOVER_USER = os.environ.get("PUSHOVER_USER")
+URLS_LIST = os.environ.get("URLS_LIST")
+#URLS_LIST = "[{\"url\": \"http://nuc:1935/\", \"title\": \"Get iPlayer\"}, {\"url\": \"http://nuc:3000/\", \"title\": \"Air Gradient\"}, {\"url\": \"http://nuc:9090/\", \"title\": \"Prometheus\"}, {\"url\": \"http://nuc:9000/\", \"title\": \"Portainer\"}, {\"url\": \"http://nuc:8096/\", \"title\": \"Emby\"}, {\"url\": \"http://zeropi:8765/\", \"title\": \"ZeroPi\"}]"
 
 upcount = 0
 downcount = 0
@@ -20,7 +23,7 @@ def notify_pushover(url: str, title: str):
 		"user": PUSHOVER_USER,          	 	# Insert user token here
 		"html": "1",                            # 1 for HTML, 0 to disable
 		"title": "Site Down!",              	# Title of the message
-		"message": f"{title} is not reachable!",            	# Content of the message - include HTML if required
+		"message": f"{title} is unreachable!",  # Content of the message - include HTML if required
 		"url": url,                 			# Link to be included in message
 		"url_title":title,                   	# Text for the link
 		"sound": "none",                        # Define the sound played on the receiving device
@@ -43,13 +46,9 @@ def check_site(url: str, title: str):
 	except KeyboardInterrupt:
 		print("Finished")
 		exit()
-	
-f = open('urls.list','r')
-lines = f.readlines()
-for line in lines:
-	print(line)
-	url, title = line.split(',')
-	check_site(url, title.rstrip())
-f.close()
+
+url_list = json.loads(URLS_LIST)
+for url in url_list:
+	check_site(url['url'], url['title'])
 
 print(f"{upcount+downcount} domains checked. UP: {upcount}\t DOWN: {downcount}")
