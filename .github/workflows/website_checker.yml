@@ -1,9 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Scheduled Job
 
-# Controls when the workflow will run
 on:
+  schedule:
+    - cron: "0 * * * *"
+    - cron: "*/5 20-21 * * *"
+
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
@@ -43,8 +46,9 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           pip3 install python-dotenv==0.20.0
-          echo "http://nuc:1935/,Get iPlayer" > urls.list
-          echo "http://zeropi:8765/,ZeroPi" >> urls.list
-          echo "http://nuc:1936/,Poo Player" >> urls.list
+          #echo "http://nuc:1935/,Get iPlayer" > urls.list
+          #echo "http://zeropi:8765/,ZeroPi" >> urls.list
+          #echo "http://nuc:1936/,Poo Player" >> urls.list
+          echo ${{ secrets.URLS_LIST }} >> urls.list
           more urls.list
           python3 ./checker.py   
