@@ -27,12 +27,11 @@ jobs:
           # Your Tailscale authentication key, from the admin panel.
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
     
-      - name: Run a multi-line script
+      - name: Run website checker
         env:
          URLS_LIST: ${{ secrets.URLS_LIST }}
          PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
         run: |
-          echo "$URLS_LIST"
-          pip3 install python-dotenv==0.20.0
+          #pip3 install python-dotenv==0.20.0
           python3 ./checker.py
