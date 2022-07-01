@@ -3,9 +3,9 @@ import urllib
 import urllib.request
 import os
 import json
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-load_dotenv()
+#load_dotenv()
 
 PUSHOVER_APP_TOKEN = os.environ.get("PUSHOVER_APP_TOKEN")
 PUSHOVER_USER = os.environ.get("PUSHOVER_USER")
