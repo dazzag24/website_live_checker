@@ -10,6 +10,7 @@ load_dotenv()
 PUSHOVER_APP_TOKEN = os.environ.get("PUSHOVER_APP_TOKEN")
 PUSHOVER_USER = os.environ.get("PUSHOVER_USER")
 URLS_LIST = os.environ.get("URLS_LIST")
+# [{"url": "http://nuc:1935/", "title": "Get iPlayer"}, {"url": "http://nuc:3000/", "title": "Air Gradient"}, {"url": "http://nuc:9090/", "title": "Prometheus"}, {"url": "http://nuc:9000/", "title": "Portainer"}, {"url": "http://nuc:8096/", "title": "Emby"}, {"url": "http://zeropi:8765/", "title": "ZeroPi"}]
 #URLS_LIST = "[{\"url\": \"http://nuc:1935/\", \"title\": \"Get iPlayer\"}, {\"url\": \"http://nuc:3000/\", \"title\": \"Air Gradient\"}, {\"url\": \"http://nuc:9090/\", \"title\": \"Prometheus\"}, {\"url\": \"http://nuc:9000/\", \"title\": \"Portainer\"}, {\"url\": \"http://nuc:8096/\", \"title\": \"Emby\"}, {\"url\": \"http://zeropi:8765/\", \"title\": \"ZeroPi\"}]"
 
 upcount = 0
