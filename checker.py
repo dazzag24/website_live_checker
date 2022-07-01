@@ -47,6 +47,7 @@ def check_site(url: str, title: str):
 		print("Finished")
 		exit()
 
+print(f"URLS_LIST: {URLS_LIST}")
 url_list = json.loads(URLS_LIST)
 for url in url_list:
 	check_site(url['url'], url['title'])
