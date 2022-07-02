@@ -48,6 +48,6 @@ The tailscale authkey is an ephemeral key to be used by the [tailscsle github ac
 When using github actions you don't need to escape the quotes in the JSON.
 
 ```
-"[{"url": "http:/first.com:1935/", "title": "First site"}, {"url": "http://second.com:3000/", "title": "Second site"}]"
+[{"url": "http:/first.com:1935/", "title": "First site"}, {"url": "http://second.com:3000/", "title": "Second site"}]
 ```
 
