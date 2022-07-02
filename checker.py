@@ -3,15 +3,15 @@ import urllib
 import urllib.request
 import os
 import json
-#from dotenv import load_dotenv
-
-#load_dotenv()
+try:
+	from dotenv import load_dotenv
+	load_dotenv()
+except ImportError:
+	pass
 
 PUSHOVER_APP_TOKEN = os.environ.get("PUSHOVER_APP_TOKEN")
 PUSHOVER_USER = os.environ.get("PUSHOVER_USER")
 URLS_LIST = os.environ.get("URLS_LIST")
-# [{"url": "http://nuc:1935/", "title": "Get iPlayer"}, {"url": "http://nuc:3000/", "title": "Air Gradient"}, {"url": "http://nuc:9090/", "title": "Prometheus"}, {"url": "http://nuc:9000/", "title": "Portainer"}, {"url": "http://nuc:8096/", "title": "Emby"}, {"url": "http://zeropi:8765/", "title": "ZeroPi"}]
-#URLS_LIST = "[{\"url\": \"http://nuc:1935/\", \"title\": \"Get iPlayer\"}, {\"url\": \"http://nuc:3000/\", \"title\": \"Air Gradient\"}, {\"url\": \"http://nuc:9090/\", \"title\": \"Prometheus\"}, {\"url\": \"http://nuc:9000/\", \"title\": \"Portainer\"}, {\"url\": \"http://nuc:8096/\", \"title\": \"Emby\"}, {\"url\": \"http://zeropi:8765/\", \"title\": \"ZeroPi\"}]"
 
 upcount = 0
 downcount = 0
@@ -48,7 +48,7 @@ def check_site(url: str, title: str):
 		print("Finished")
 		exit()
 
-print(f"URLS_LIST: {URLS_LIST}")
+#print(f"URLS_LIST: {URLS_LIST}")
 url_list = json.loads(URLS_LIST)
 for url in url_list:
 	check_site(url['url'], url['title'])
