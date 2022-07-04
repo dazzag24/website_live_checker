@@ -8,7 +8,12 @@ Supplied with a list of URLs, this script will check if they are acessible. If n
 
 If using a local deployment:
 
-`python3 -m venv venv`
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
+
 
 ### Install the requirements
 
