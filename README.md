@@ -13,8 +13,6 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-
-
 ### Install the requirements
 
 `pip install -r requirements.txt`
@@ -23,7 +21,6 @@ Note that currently the program is configured to run as a github action. In this
 Running as a github action requires no additonal python module requirements.
 
 Running locally requires that you install dotenv (see requirements.txt) and that you configure the .env file.
-
 
 ### Configuration
 
