@@ -50,7 +50,15 @@ TAILSCALE_AUTHKEY
 
 The tailscale authkey is an ephemeral key to be used by the [tailscsle github action](https://github.com/tailscale/github-action)
 
-NOTE: When using github actions you don't need to escape the quotes in the JSON.
+To create a tailscale key vist the key section of the admin [page](https://login.tailscale.com/admin/settings/keys) and create a key with the following settings:
+- Reusable: NO
+- Ephemeral: YES
+- Tags: NO
+
+By default this key will need refreshing after 3 months.
+
+
+Note that for the URL_LIST when using github actions you don't need to escape the quotes in the JSON.
 
 ```
 [{"url": "http:/first.com:1935/", "title": "First site"}, {"url": "http://second.com:3000/", "title": "Second site"}]
