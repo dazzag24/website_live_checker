@@ -22,7 +22,6 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Connect Tailscale
-        #uses: tailscale/github-action@v1
         uses: tailscale/github-action
         with:
           # Your Tailscale authentication key, from the admin panel.
