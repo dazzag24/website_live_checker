@@ -25,7 +25,8 @@ jobs:
         uses: tailscale/github-action@v1
         with:
           # Your Tailscale authentication key, from the admin panel.
-          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          authkey: "${{ secrets.TAILSCALE_AUTHKEY }}"
+          version: "1.30.2"
     
       - name: Run website checker
         env:
