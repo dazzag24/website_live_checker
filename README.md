@@ -48,7 +48,7 @@ TAILSCALE_AUTHKEY
 The tailscale authkey is an ephemeral key to be used by the [tailscsle github action](https://github.com/tailscale/github-action)
 
 To create a tailscale key vist the key section of the admin [page](https://login.tailscale.com/admin/settings/keys) and create a key with the following settings:
-- Reusable: NO
+- Reusable: YES
 - Ephemeral: YES
 - Tags: NO
 
